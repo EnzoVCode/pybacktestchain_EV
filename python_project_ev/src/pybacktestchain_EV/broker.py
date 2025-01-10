@@ -186,6 +186,32 @@ class Broker:
         """Returns the transaction log."""
         return self.transaction_log
 
+
+    def apply_risk_management(self, prices: dict, stop_loss: float, take_profit: float, date: datetime):
+        """
+        Applies stop-loss and take-profit to current positions.
+        """
+        for ticker, position in list(self.positions.items()):
+            current_price = prices.get(ticker)
+            if current_price is None:
+                logging.warning(f"Price for {ticker} not available on {date}. Skipping risk management.")
+                continue
+
+            # Calculate price change
+            entry_price = position.entry_price
+            change = (current_price - entry_price) / entry_price
+
+            # Apply stop-loss
+            if change <= -stop_loss:
+                logging.info(f"Stop-loss triggered for {ticker} on {date}. Selling all shares.")
+                self.sell(ticker, position.quantity, current_price, date)
+
+            # Apply take-profit
+            elif change >= take_profit:
+                logging.info(f"Take-profit triggered for {ticker} on {date}. Selling all shares.")
+                self.sell(ticker, position.quantity, current_price, date)
+
+
 @dataclass
 class RebalanceFlag:
     def time_to_rebalance(self, t: datetime):
