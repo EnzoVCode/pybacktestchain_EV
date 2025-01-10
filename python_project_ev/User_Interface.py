@@ -24,7 +24,7 @@ st.sidebar.header("Configuration")
 # Input tickers
 tickers = st.sidebar.text_area(
     "Enter Stock Tickers (comma-separated)",
-    "AAPL,MSFT,GOOGL,AMZN"
+    "NVDA, AAPL, ,GC=F, CL=F, TLT, LQD, EURUSD=X, JPY=X"
 )
 tickers_list = [ticker.strip() for ticker in tickers.split(",") if ticker.strip()]
 
@@ -45,6 +45,18 @@ strategy = st.sidebar.selectbox(
 )
 
 confidence_level = st.sidebar.slider("Risk Metrics Confidence Level (%)", 90, 99, 95) / 100
+
+# Add stop-loss and take-profit inputs in the interface
+st.sidebar.header("Risk Management")
+stop_loss = st.sidebar.number_input(
+    "Stop Loss (%)", min_value=0.0, max_value=100.0, value=10.0, step=0.1
+) / 100  # Convert percentage to decimal
+take_profit = st.sidebar.number_input(
+    "Take Profit (%)", min_value=0.0, max_value=100.0, value=10.0, step=0.1
+) / 100  # Convert percentage to decimal
+
+st.write(f"Selected Stop Loss: {stop_loss * 100:.2f}%")
+st.write(f"Selected Take Profit: {take_profit * 100:.2f}%")
 
 # Add transaction cost input in the interface
 st.sidebar.header("Additional Parameters")
@@ -80,7 +92,7 @@ if st.sidebar.button("Run Backtest"):
 
             # Initialize Broker
             broker = Broker(cash=initial_cash, verbose=True)
-
+            
             # Simulate backtest
             portfolio_value = []
             transaction_log = []
@@ -92,6 +104,8 @@ if st.sidebar.button("Run Backtest"):
                 if prices.isnull().any():
                     st.warning(f"Skipping date {date} due to missing data.")
                     continue
+                
+                broker.apply_risk_management(prices, stop_loss, take_profit, date)
 
                 # Compute information set
                 try:
