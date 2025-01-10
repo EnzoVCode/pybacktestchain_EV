@@ -1,12 +1,26 @@
 # CHANGELOG
 
 
+## v1.2.0 (2025-01-10)
+
+### Features
+
+- Important update
+  ([`e30cd6c`](https://github.com/EnzoVCode/python_project/commit/e30cd6cdb16417d7fa408359935c26af63105c9a))
+
+CHANGE: implemented a auto_save ofthe blockchain under the randomly generated_name for each run in
+  the UI
+
+
+## v1.1.0 (2025-01-10)
+
+
 ## v1.0.0 (2025-01-10)
 
 ### Features
 
 - Update the code majorly
-  ([`468436c`](https://github.com/EnzoVCode/python_project/commit/468436c196899783c4a3a937c53c7f8a1a9cdcb2))
+  ([`cbceab0`](https://github.com/EnzoVCode/python_project/commit/cbceab083d73df3de1dd8f55f697de103d5454d1))
 
 BREAKING CHANGE: add a first version of the User Interface Interactive
 
