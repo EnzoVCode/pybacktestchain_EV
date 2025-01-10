@@ -1,5 +1,8 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 from datetime import datetime, timedelta
 from src.pybacktestchain_EV.data_module import DataModule, EnhancedInformation, preprocess_data, get_stocks_data
 from src.pybacktestchain_EV.strategies import (
@@ -9,10 +12,9 @@ from src.pybacktestchain_EV.strategies import (
     risk_parity_strategy,
 )
 from src.pybacktestchain_EV.broker import Broker
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 from src.pybacktestchain_EV.risk_metrics import calculate_var, calculate_expected_shortfall
+from src.pybacktestchain_EV.utils import generate_random_name
+
 
 # Initialize Streamlit app
 st.title("Portfolio Backtesting Interface")
@@ -44,19 +46,25 @@ strategy = st.sidebar.selectbox(
     ]
 )
 
-confidence_level = st.sidebar.slider("Risk Metrics Confidence Level (%)", 90, 99, 95) / 100
-
-# Add stop-loss and take-profit inputs in the interface
+# Add stop-loss, take-profit inputs, and confidence level slider under Risk Management header
 st.sidebar.header("Risk Management")
+
 stop_loss = st.sidebar.number_input(
     "Stop Loss (%)", min_value=0.0, max_value=100.0, value=10.0, step=0.1
 ) / 100  # Convert percentage to decimal
+
 take_profit = st.sidebar.number_input(
     "Take Profit (%)", min_value=0.0, max_value=100.0, value=10.0, step=0.1
 ) / 100  # Convert percentage to decimal
 
+confidence_level = st.sidebar.slider(
+    "Risk Metrics Confidence Level (%)", 90, 99, 95
+) / 100  # Convert percentage to decimal
+
+# Display the selected values
 st.write(f"Selected Stop Loss: {stop_loss * 100:.2f}%")
 st.write(f"Selected Take Profit: {take_profit * 100:.2f}%")
+st.write(f"Selected Confidence Level: {confidence_level * 100:.0f}%")
 
 # Add transaction cost input in the interface
 st.sidebar.header("Additional Parameters")
@@ -92,7 +100,9 @@ if st.sidebar.button("Run Backtest"):
 
             # Initialize Broker
             broker = Broker(cash=initial_cash, verbose=True)
-            
+            backtest_name = generate_random_name()
+            broker.initialize_blockchain(backtest_name)
+
             # Simulate backtest
             portfolio_value = []
             transaction_log = []
@@ -143,6 +153,12 @@ if st.sidebar.button("Run Backtest"):
                 except ValueError as e:
                     st.error(f"Execution error on {date}: {e}")
                     continue
+            
+            # Save backtest in the blockchain
+            st.write(f"Backtest saved under the name: {backtest_name}")
+            transaction_df = pd.concat(transaction_log, ignore_index=True)
+            broker.blockchain.add_block(backtest_name, transaction_df.to_string())
+            st.write(f"Blockchain file created: blockchain/{backtest_name}.pkl")
 
             # Convert portfolio value list to a DataFrame for analysis
             portfolio_value_df = pd.DataFrame(portfolio_value).set_index("Date")

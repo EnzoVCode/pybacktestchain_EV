@@ -34,25 +34,23 @@ class Broker:
     transaction_cost: float = 0.001
 
     def initialize_blockchain(self, name: str):
-        # Check if the blockchain is already initialized and stored in the blockchain folder
-        # if folder blockchain does not exist, create it
+        # Ensure the blockchain folder exists
         if not os.path.exists('blockchain'):
             os.makedirs('blockchain')
-        chains = os.listdir('blockchain')
-        ending = f'{name}.pkl'
-        if ending in chains:
+
+        # Use the given name to create a unique file
+        blockchain_file = f'blockchain/{name}.pkl'
+        if os.path.exists(blockchain_file):
             if self.verbose:
-                logging.warning(f"Blockchain with name {name} already exists. Please use a different name.")
-            with open(f'blockchain/{name}.pkl', 'rb') as f:
+                logging.warning(f"Blockchain with name {name} already exists. Loading existing blockchain.")
+            with open(blockchain_file, 'rb') as f:
                 self.blockchain = pickle.load(f)
-            return
+        else:
+            self.blockchain = Blockchain(name)
+            self.blockchain.store()
+            if self.verbose:
+                logging.info(f"Blockchain with name {name} initialized and stored as {blockchain_file}.")
 
-        self.blockchain = Blockchain(name)
-        # Store the blockchain
-        self.blockchain.store()
-
-        if self.verbose:
-            logging.info(f"Blockchain with name {name} initialized and stored in the blockchain folder.")
 
     def __post_init__(self):
         # Initialize positions as a dictionary of Position objects
