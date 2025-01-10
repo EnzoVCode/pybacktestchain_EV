@@ -1,6 +1,20 @@
 # CHANGELOG
 
 
+## v1.0.0 (2025-01-10)
+
+### Features
+
+- Update the code majorly
+  ([`468436c`](https://github.com/EnzoVCode/python_project/commit/468436c196899783c4a3a937c53c7f8a1a9cdcb2))
+
+BREAKING CHANGE: add a first version of the User Interface Interactive
+
+### BREAKING CHANGES
+
+- Add a first version of the User Interface Interactive
+
+
 ## v0.1.0 (2025-01-10)
 
 ### Features
