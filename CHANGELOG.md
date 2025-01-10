@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v1.2.3 (2025-01-10)
+
+### Bug Fixes
+
+- Feleted unwanted files
+  ([`777f32f`](https://github.com/EnzoVCode/python_project/commit/777f32f7c2cd88a2aeb58776496762eefc0e890d))
+
+
 ## v1.2.2 (2025-01-10)
 
 ### Bug Fixes
