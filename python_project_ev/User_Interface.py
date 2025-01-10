@@ -10,6 +10,7 @@ from src.pybacktestchain_EV.strategies import (
     min_variance_strategy,
     max_sharpe_ratio_strategy,
     risk_parity_strategy,
+    apply_strategy
 )
 from src.pybacktestchain_EV.broker import Broker
 from src.pybacktestchain_EV.risk_metrics import calculate_var, calculate_expected_shortfall
@@ -25,8 +26,8 @@ st.sidebar.header("Configuration")
 
 # Input tickers
 tickers = st.sidebar.text_area(
-    "Enter Stock Tickers (comma-separated)",
-    "NVDA, AAPL, ,GC=F, CL=F, TLT, LQD, EURUSD=X, JPY=X"
+    "Enter Assets Tickers (comma-separated)",
+    "NVDA, AAPL, GC=F, CL=F, TLT, LQD, EURUSD=X"
 )
 tickers_list = [ticker.strip() for ticker in tickers.split(",") if ticker.strip()]
 
@@ -89,6 +90,7 @@ if st.sidebar.button("Run Backtest"):
             try:
                 data = data.dropna()
                 processed_data = preprocess_data(data)
+                processed_data.index = pd.to_datetime(processed_data.index)
                 st.write("### Processed Data for Strategies")
                 st.write(processed_data.head())
             except Exception as e:
@@ -128,14 +130,7 @@ if st.sidebar.button("Run Backtest"):
 
                 # Strategy selection
                 try:
-                    if strategy == "Equal Weight":
-                        portfolio = equal_weight_strategy(prices)
-                    elif strategy == "Minimum Variance":
-                        portfolio = min_variance_strategy(prices, covariance_matrix)
-                    elif strategy == "Maximum Sharpe Ratio":
-                        portfolio = max_sharpe_ratio_strategy(expected_return, covariance_matrix)
-                    elif strategy == "Risk-Parity":
-                        portfolio = risk_parity_strategy(prices, covariance_matrix)
+                    portfolio = apply_strategy(strategy, prices, covariance_matrix, expected_return)
                 except ValueError as e:
                     st.error(f"Strategy error on {date}: {e}")
                     continue
@@ -158,7 +153,6 @@ if st.sidebar.button("Run Backtest"):
             st.write(f"Backtest saved under the name: {backtest_name}")
             transaction_df = pd.concat(transaction_log, ignore_index=True)
             broker.blockchain.add_block(backtest_name, transaction_df.to_string())
-            st.write(f"Blockchain file created: blockchain/{backtest_name}.pkl")
 
             # Convert portfolio value list to a DataFrame for analysis
             portfolio_value_df = pd.DataFrame(portfolio_value).set_index("Date")

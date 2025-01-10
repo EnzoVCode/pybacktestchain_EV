@@ -40,3 +40,14 @@ def risk_parity_strategy(prices, covariance_matrix):
     weights = inv_volatility / np.sum(inv_volatility)
     weights = np.nan_to_num(weights, nan=0.0)
     return dict(zip(prices.index, weights))
+
+
+def apply_strategy(strategy, prices, covariance_matrix, expected_return):
+    if strategy == "Equal Weight":
+        return equal_weight_strategy(prices)
+    elif strategy == "Minimum Variance":
+        return min_variance_strategy(prices, covariance_matrix)
+    elif strategy == "Maximum Sharpe Ratio":
+        return max_sharpe_ratio_strategy(expected_return, covariance_matrix)
+    elif strategy == "Risk-Parity":
+        return risk_parity_strategy(prices, covariance_matrix)
