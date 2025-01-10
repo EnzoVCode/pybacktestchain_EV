@@ -25,9 +25,10 @@ def get_stock_data(ticker, start_date, end_date):
     try:
         stock = yf.Ticker(ticker)
         data = stock.history(start=start_date, end=end_date, auto_adjust=False, actions=False)
-        df = data.reset_index()
-        df['ticker'] = ticker
-        return df
+        data.reset_index(inplace=True)
+        data['Date'] = pd.to_datetime(data['Date']).dt.tz_localize(None)  # Ensure tz-naive
+        data['ticker'] = ticker
+        return data
     except Exception as e:
         logging.warning(f"Failed to retrieve data for {ticker}: {e}")
         return pd.DataFrame()
@@ -38,9 +39,12 @@ def get_stocks_data(tickers, start_date, end_date):
     for ticker in tickers:
         df = get_stock_data(ticker, start_date, end_date)
         if not df.empty:
+            df['Date'] = pd.to_datetime(df['Date']).dt.tz_localize(None)  # Standardize date format
             dfs.append(df)
     if dfs:
-        return pd.concat(dfs, ignore_index=True)
+        combined_data = pd.concat(dfs, ignore_index=True)
+        combined_data['Date'] = pd.to_datetime(combined_data['Date']).dt.tz_localize(None)  # Final consistency
+        return combined_data
     else:
         logging.warning("No data retrieved for the given tickers.")
         return pd.DataFrame()
@@ -63,10 +67,11 @@ class Information:
     def slice_data(self, t: datetime):
         data = self.data_module.data
         s = self.s
-        
-        data[self.time_column] = pd.to_datetime(data[self.time_column])
+        data[self.time_column] = pd.to_datetime(data[self.time_column]).dt.tz_localize(None)  # Ensure tz-naive
+        t = pd.Timestamp(t).tz_localize(None)  # Ensure tz-naive
         sliced_data = data[(data[self.time_column] >= t - s) & (data[self.time_column] < t)]
         return sliced_data
+
 
     def get_prices(self, t: datetime):
         data = self.slice_data(t)
@@ -139,7 +144,7 @@ class OptimizedPortfolio(EnhancedInformation):
 
 def preprocess_data(data):
     """Prepare data for strategies."""
-    data["Date"] = pd.to_datetime(data["Date"]).dt.tz_localize(None)
+    data["Date"] = pd.to_datetime(data["Date"]).dt.tz_localize(None)  # Ensure tz-naive
     wide_data = data.pivot(index="Date", columns="ticker", values="Adj Close")
     wide_data = wide_data.dropna().sort_index()  # Clean and sort data
     return wide_data
