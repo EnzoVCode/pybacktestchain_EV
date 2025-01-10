@@ -1,6 +1,22 @@
 # CHANGELOG
 
 
+## v1.2.2 (2025-01-10)
+
+### Bug Fixes
+
+- Optimized the UI and created a apply_strategy function
+  ([`04f8146`](https://github.com/EnzoVCode/python_project/commit/04f8146d5d430023da75b7092b1c3c598e5e6010))
+
+
+## v1.2.1 (2025-01-10)
+
+### Bug Fixes
+
+- Deleted unwanted files
+  ([`88df481`](https://github.com/EnzoVCode/python_project/commit/88df481ba4811cb2c17c208d6b191cc73b2dcd5c))
+
+
 ## v1.2.0 (2025-01-10)
 
 ### Features
