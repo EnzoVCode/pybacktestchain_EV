@@ -1,6 +1,16 @@
 # CHANGELOG
 
 
+## v0.1.0 (2025-01-10)
+
+### Features
+
+- Update the code majorly
+  ([`2532681`](https://github.com/EnzoVCode/python_project/commit/25326819acd012e029dbbd09c173cba31bcc467d))
+
+New module created: risk_metrics.py
+
+
 ## v0.0.2 (2025-01-10)
 
 ### Bug Fixes
