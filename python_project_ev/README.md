@@ -16,10 +16,11 @@ $ pip install python_project_ev
 
 ## Features
 
-- **Portfolio Backtesting**: Supports backtesting of trading strategies such as Equal Weight, Minimum Variance, Maximum Sharpe Ratio, and Risk Parity.
-- **Risk Management**: Includes stop-loss and take-profit mechanisms with customizable thresholds.
-- **Blockchain Integration**: Stores backtest results in a blockchain for transparency and immutability.
-- **Interactive UI**: A Streamlit-based interface for configuring backtests, visualizing results, and analyzing performance metrics.
+- **Interactive UI**: A Streamlit-based interactive interface for configuring backtests, visualizing results, analyzing performance and risk metrics.
+- **Portfolio Backtesting**: Supports backtesting of standard trading strategies such as Equal Weight, Minimum Variance, Maximum Sharpe Ratio, and Risk Parity.
+- **Customizable Transaction Costs**: Includes a feature to account for transaction costs in backtesting.
+- **Risk Management**: Includes stop-loss and take-profit mechanisms with customizable thresholds, as well as Value-at-Risk (VaR) and Expected Shortfall for the backtested portfolio.
+- **Blockchain Integration**: Stores backtest results in a blockchain.
 
 ## Usage
 
@@ -43,9 +44,9 @@ $ streamlit run app.py
 
 ### Viewing Results
 
-- Portfolio value and returns are displayed over time.
+- Portfolio value and returns are displayed over time, as well as the distribution of returns.
 - Risk metrics, such as Value-at-Risk (VaR) and Expected Shortfall (ES), are calculated.
-- A transaction log is provided for detailed insights.
+- A transaction log is provided for detailed insights and store to the blockchain.
 - Additional visualizations include correlation heatmaps and return distributions.
 
 ### Blockchain Storage
