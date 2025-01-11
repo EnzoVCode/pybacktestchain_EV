@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pybacktestchain_EV',
-    version='1.2.3',
+    version='0.1.0',
     author='Enzo Volpato',
     author_email='enzo.volpato@outlook.fr',
     description='Improved pybacktestchain library with interactive UI and features added (risk measures, trading strategies, multiple asset classes)',
