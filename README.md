@@ -1,10 +1,16 @@
 # pybacktestchain-ev
 
-Package for the Python Course based on pybacktestchain library by J. Imbett.
+Package for the Python Course based on pybacktestchain library by J. Imbet.
 
 ## Overview
 
 `pybacktestchain-ev` is a Python package designed to facilitate portfolio backtesting using various trading strategies. The package incorporates risk management tools, blockchain-based backtest storage, and a user-friendly interface built with Streamlit.
+
+The package includes:
+- A fully interactive Streamlit-based user interface (UI).
+- Support for multiple asset classes (stocks, commodities, FX, fixed income, etc.).
+- Customizable backtesting parameters and risk management tools.
+- Pre-processing capabilities for data compatibility across all time zones.
 
 ## Installation
 
@@ -16,11 +22,19 @@ $ pip install pybacktestchain-ev
 
 ## Features
 
-- **Interactive UI**: A Streamlit-based interactive interface for configuring backtests, visualizing results, analyzing performance and risk metrics.
-- **Portfolio Backtesting**: Supports backtesting of standard trading strategies such as Equal Weight, Minimum Variance, Maximum Sharpe Ratio, and Risk Parity.
+- **Interactive UI**: A Streamlit-based interface for configuring backtests, visualizing results, and analyzing performance and risk metrics.
+- **Portfolio Backtesting**: Supports backtesting of standard trading strategies:
+  1. Equal Weight
+  2. Minimum Variance
+  3. Maximum Sharpe Ratio
+  4. Risk Parity
 - **Customizable Transaction Costs**: Allows precise configuration of trading fees for realistic simulations.
-- **Risk Management**: Includes stop-loss and take-profit mechanisms with customizable thresholds, as well as Value-at-Risk (VaR) and Expected Shortfall for the backtested portfolio.
-- **Blockchain Integration**: Stores backtest results in a blockchain.
+- **Risk Management**:
+  - Includes stop-loss and take-profit mechanisms with customizable thresholds.
+  - Computes Value-at-Risk (VaR) and Expected Shortfall (ES) with user-defined confidence levels.
+- **Pre-Processing**:
+  - Handles data across various asset classes and ensures compatibility across time zones.
+- **Blockchain Integration**: Stores backtest results in a tamper-proof blockchain for future reference.
 
 ## Usage
 
@@ -34,24 +48,35 @@ $ streamlit run <your_app_file>.py
 
 ### Configuring a Backtest
 
-1. **Select Tickers**: Enter stock tickers (comma-separated) to define the universe (works across all asset classes).
+1. **Select Tickers**: Enter assets' tickers (comma-separated) to define the universe (supports all asset classes).
 2. **Set Parameters**:
    - Initial cash amount.
    - Start and end dates for the backtest.
-   - Choose a strategy: Equal Weight, Minimum Variance, Maximum Sharpe Ratio, or Risk Parity.
-   - Configure risk management: Stop-loss, take-profit percentages, and transaction costs.
+   - Choose a strategy:
+     - Equal Weight
+     - Minimum Variance
+     - Maximum Sharpe Ratio
+     - Risk Parity
+   - Configure risk management:
+     - Stop-loss and take-profit thresholds.
+     - Transaction costs.
+     - Confidence levels for VaR and Expected Shortfall.
 3. **Run the Backtest**: Click the "Run Backtest" button.
 
 ### Viewing Results
 
-- Portfolio value and returns are displayed over time, as well as the distribution of returns.
-- Risk metrics, such as Value-at-Risk (VaR) and Expected Shortfall (ES), are calculated.
-- A transaction log is provided for detailed insights and store to the blockchain.
-- Additional visualizations include correlation heatmaps and return distributions.
+- **Summary Statistics**: Includes key metrics for the backtested portfolio.
+- **Visualizations**:
+  - Portfolio value and returns over time.
+  - Distribution of returns.
+  - Correlation heatmap of asset returns.
+- **Risk Metrics**: Displays VaR and Expected Shortfall with selected confidence levels.
+- **Transaction Log**: Provides detailed insights into executed trades.
+- **Blockchain Storage**: Saves each backtest under a randomly generated name for future reference.
 
 ### Blockchain Storage
 
-Each backtest is saved in a blockchain under a randomly generated name. This ensures results are tamper-proof and can be referenced later. Blockchain files are stored in the `blockchain/` directory within the package folder.
+Each backtest is saved in a blockchain file under a randomly generated name. This ensures results are tamper-proof and can be referenced later. Blockchain files are stored in the `blockchain/` directory within the package folder.
 
 ## Contributing
 
