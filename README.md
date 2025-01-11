@@ -1,24 +1,24 @@
-# python_project_ev
+# pybacktestchain_EV
 
-Package for the Master 203 project at Paris-Dauphine University.
+Package for the Python Course based on pybacktestchain library by J. Imbett.
 
 ## Overview
 
-`python_project_ev` is a Python package designed to facilitate portfolio backtesting using various trading strategies. The package incorporates risk management tools, blockchain-based backtest storage, and a user-friendly interface built with Streamlit.
+`pybacktestchain_EV` is a Python package designed to facilitate portfolio backtesting using various trading strategies. The package incorporates risk management tools, blockchain-based backtest storage, and a user-friendly interface built with Streamlit.
 
 ## Installation
 
 You can install the package via pip:
 
 ```bash
-$ pip install python_project_ev
+$ pip install pybacktestchain_EV
 ```
 
 ## Features
 
 - **Interactive UI**: A Streamlit-based interactive interface for configuring backtests, visualizing results, analyzing performance and risk metrics.
 - **Portfolio Backtesting**: Supports backtesting of standard trading strategies such as Equal Weight, Minimum Variance, Maximum Sharpe Ratio, and Risk Parity.
-- **Customizable Transaction Costs**: Includes a feature to account for transaction costs in backtesting.
+- **Customizable Transaction Costs**: Allows precise configuration of trading fees for realistic simulations.
 - **Risk Management**: Includes stop-loss and take-profit mechanisms with customizable thresholds, as well as Value-at-Risk (VaR) and Expected Shortfall for the backtested portfolio.
 - **Blockchain Integration**: Stores backtest results in a blockchain.
 
@@ -29,7 +29,7 @@ $ pip install python_project_ev
 To start the Streamlit interface:
 
 ```bash
-$ streamlit run app.py
+$ streamlit run <your_app_file>.py
 ```
 
 ### Configuring a Backtest
@@ -51,7 +51,7 @@ $ streamlit run app.py
 
 ### Blockchain Storage
 
-Each backtest is saved in a blockchain under a randomly generated name. This ensures results are tamper-proof and can be referenced later. Blockchain files are stored in the `blockchain/` directory.
+Each backtest is saved in a blockchain under a randomly generated name. This ensures results are tamper-proof and can be referenced later. Blockchain files are stored in the `blockchain/` directory within the package folder.
 
 ## Contributing
 
@@ -59,8 +59,8 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 
 ## License
 
-`python_project_ev` was created by Enzo Volpato. It is licensed under the terms of the MIT license.
+`pybacktestchain_EV` was created by Enzo Volpato. It is licensed under the terms of the MIT license.
 
 ## Credits
 
-`python_project_ev` was created with [`cookiecutter`](https://cookiecutter.readthedocs.io/en/latest/) and the `py-pkgs-cookiecutter` [template](https://github.com/py-pkgs/py-pkgs-cookiecutter).
+`pybacktestchain_EV` was created with [`cookiecutter`](https://cookiecutter.readthedocs.io/en/latest/) and the `py-pkgs-cookiecutter` [template](https://github.com/py-pkgs/py-pkgs-cookiecutter).
