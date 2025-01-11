@@ -8,7 +8,6 @@ import pickle
 from pybacktestchain.data_module import UNIVERSE_SEC, FirstTwoMoments, get_stocks_data, DataModule, Information
 from pybacktestchain.utils import generate_random_name
 from pybacktestchain.blockchain import Block, Blockchain
-from numba import jit 
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')

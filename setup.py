@@ -23,7 +23,6 @@ setup(
         'matplotlib',
         'seaborn',
         'scipy',
-        'numba',
         'pytest',
         'yfinance',
         'sec-cik-mapper',
