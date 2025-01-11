@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pybacktestchain_ev"
-version = "0.1.0"
+version = "0.1.1"
 description = "Improved pybacktestchain library with interactive UI and features added (risk measures, trading strategies, multiple asset classes)"
 authors = ["Enzo Volpato <enzo.volpato@outlook.fr>"]
 license = "MIT"

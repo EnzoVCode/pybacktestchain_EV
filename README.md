@@ -1,17 +1,17 @@
-# pybacktestchain_EV
+# pybacktestchain-ev
 
 Package for the Python Course based on pybacktestchain library by J. Imbett.
 
 ## Overview
 
-`pybacktestchain_EV` is a Python package designed to facilitate portfolio backtesting using various trading strategies. The package incorporates risk management tools, blockchain-based backtest storage, and a user-friendly interface built with Streamlit.
+`pybacktestchain-ev` is a Python package designed to facilitate portfolio backtesting using various trading strategies. The package incorporates risk management tools, blockchain-based backtest storage, and a user-friendly interface built with Streamlit.
 
 ## Installation
 
 You can install the package via pip:
 
 ```bash
-$ pip install pybacktestchain_EV
+$ pip install pybacktestchain-ev
 ```
 
 ## Features
@@ -59,8 +59,8 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 
 ## License
 
-`pybacktestchain_EV` was created by Enzo Volpato. It is licensed under the terms of the MIT license.
+`pybacktestchain-ev` was created by Enzo Volpato. It is licensed under the terms of the MIT license.
 
 ## Credits
 
-`pybacktestchain_EV` was created with [`cookiecutter`](https://cookiecutter.readthedocs.io/en/latest/) and the `py-pkgs-cookiecutter` [template](https://github.com/py-pkgs/py-pkgs-cookiecutter).
+`pybacktestchain-ev` was created with [`cookiecutter`](https://cookiecutter.readthedocs.io/en/latest/) and the `py-pkgs-cookiecutter` [template](https://github.com/py-pkgs/py-pkgs-cookiecutter).
